@@ -168,3 +168,8 @@ html[data-font="tsuku"]{--serif:"fot-tsukuaoldmin-pr6n","Shippori Mincho B1",ser
   .vision-body{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.lockup-mark,.lockup-rule{animation:none}}
+
+/* 幅の広い画面（1800px〜）：高さの上限（1000px）が縦横比を通して横幅まで縮めていたので、高さだけを直接決める */
+@media (min-width:1800px){
+  .hero{aspect-ratio:auto;height:min(50vw,1000px)}
+}
