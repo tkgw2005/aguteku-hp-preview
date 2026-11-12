@@ -1,0 +1,71 @@
+/* v34（2026-11-09）：見た目はv31〜v33を維持し、事業紹介資料（2026年10月）の構成に合わせる。
+   事業は3つ（AI・農業・広告）、事例は6件、会社概要を追加。 */
+
+/* メガメニュー：3事業 */
+.mega-inner{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 56px}
+.mega-col ul{flex-direction:column;flex-wrap:nowrap;gap:12px}
+
+/* 事業紹介：3列 */
+.biz-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.biz-grid-3 .biz-copy{min-height:440px;padding:36px 36px 38px}
+.biz-en{margin:0 0 6px;font:500 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#5d7268;transition:color .28s}
+.biz-grid-3 .item-title{margin-bottom:16px}
+.biz-grid-3 .item-text{padding-bottom:22px}
+.biz-points{width:100%;margin:0 0 6px;padding:0;list-style:none;border-top:1px solid #c5d1ca;transition:border-color .28s}
+.biz-points li{position:relative;padding:11px 0 11px 18px;border-bottom:1px solid #e1e8e4;font-size:13px;line-height:1.75;letter-spacing:.02em;transition:border-color .28s}
+.biz-points li:before{content:"";position:absolute;left:0;top:calc(11px + .875em);width:7px;height:1px;background:currentColor}
+.biz-item>a:hover .biz-en,.biz-item>a:focus-visible .biz-en,.biz-item>a:active .biz-en{color:#ffffffb3}
+.biz-item>a:hover .biz-points,.biz-item>a:focus-visible .biz-points,.biz-item>a:active .biz-points{border-color:#ffffff70}
+.biz-item>a:hover .biz-points li,.biz-item>a:focus-visible .biz-points li,.biz-item>a:active .biz-points li{border-color:#ffffff30}
+
+/* 取り組み・事例：6件を3列で */
+.work-grid-6{grid-template-columns:repeat(3,minmax(0,1fr));gap:64px 32px}
+.work-grid-6 .work-item:first-child{grid-row:auto}
+.work-grid-6 .work-item .item-media,.work-grid-6 .work-item:first-child .item-media,.work-grid-6 .work-item:not(:first-child) .item-media{aspect-ratio:16/10;background:#f1f4f2}
+.work-grid-6 .media-ui img{object-fit:contain;padding:6% 4%}
+.work-grid-6 .work-item .item-title,.work-grid-6 .work-item:first-child .item-title{font-size:clamp(18px,1.45vw,21px);line-height:1.8}
+.item-result{margin:14px 0 0;font-size:12px;line-height:1.9;letter-spacing:.02em;color:#52685f}
+@media(prefers-reduced-motion:no-preference){
+  .reveal-ready .work-grid-6 .work-item:nth-child(4) .item-media{transition-delay:0s}
+  .reveal-ready .work-grid-6 .work-item:nth-child(5) .item-media{transition-delay:.1s}
+  .reveal-ready .work-grid-6 .work-item:nth-child(6) .item-media{transition-delay:.15s}
+  .reveal-ready .work-item .item-result{opacity:0;transform:translateY(12px);transition:opacity .7s .4s,transform .7s cubic-bezier(.2,.65,.3,1) .4s}
+  .reveal-ready .work-item.is-in .item-result{opacity:1;transform:none}
+}
+
+/* 会社概要（ニュースと同じ型） */
+.s-company{padding:clamp(100px,10vw,160px) 0 0}
+.s-company .s-inner{display:grid;grid-template-columns:1fr 2fr;gap:8%}
+.s-company .s-head{display:block;margin:0}
+.company-list{margin:0;border-top:1px solid var(--line)}
+.company-list div{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.company-list dt{font-size:11px;letter-spacing:.08em;color:#65776e}
+.company-list dd{margin:0;font-size:14px;line-height:1.9;letter-spacing:.04em}
+.company-list dd span{margin-left:16px;font-size:11px;color:#65776e;letter-spacing:.06em}
+.footer-address{margin-top:14px;font-size:11px;line-height:1.9;letter-spacing:.06em;color:#cad7d0}
+
+@media(max-width:1100px){
+  .biz-grid-3 .biz-copy{padding:30px 26px 32px;min-height:460px}
+  .work-grid-6{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .mega-inner{grid-template-columns:1fr}
+  .biz-grid-3{grid-template-columns:1fr}
+  .biz-grid-3 .biz-copy{min-height:0}
+  .s-company .s-inner{grid-template-columns:1fr;gap:28px}
+}
+@media(max-width:600px){
+  .biz-grid-3 .biz-copy{padding:26px 22px 28px}
+  .biz-grid-3 .item-title{min-height:0;font-size:24px}
+  .biz-points li{font-size:12px}
+  .work-grid-6{grid-template-columns:1fr;gap:44px}
+  .work-grid-6 .work-item .item-title{font-size:19px}
+  .s-works .s-head{gap:16px}
+  .s-works .s-title{white-space:nowrap;font-size:clamp(23px,6.6vw,27px);letter-spacing:.06em}
+  .s-works .s-head .text-link{flex-shrink:0;gap:14px;white-space:nowrap}
+  .s-works .s-head .text-link:after{width:24px}
+  .company-list div{grid-template-columns:96px 1fr;gap:12px;padding:18px 0}
+  .company-list dd{font-size:13px}
+  .company-list dd span{display:block;margin:2px 0 0}
+}
+@media(prefers-reduced-motion:reduce){.biz-en,.biz-points,.biz-points li{transition:none}.work-item .item-result{opacity:1!important;transform:none!important}}

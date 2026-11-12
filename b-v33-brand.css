@@ -1,0 +1,11 @@
+/* A quiet brand signature; retain the Japanese headline's position and size. */
+.hero-copy-group{position:absolute;left:7%;top:43%}
+.hero .hero-copy-group h1{position:static;margin:0}
+.hero-signature{position:absolute;left:0;bottom:calc(100% + 24px);display:flex;align-items:center;gap:13px;margin:0;color:#fff}
+.hero-signature img{display:block;width:29px;height:auto}
+.hero-signature span{font:400 9px/1.2 var(--sans);letter-spacing:.24em}
+.hero-translation{margin:18px 0 0;color:#fff;font:400 12px/1.8 Georgia,'Times New Roman',serif;letter-spacing:.025em}
+@media(min-width:1800px){.hero-copy-group{left:max(7%,calc((100% - 1440px)/2))}}
+@media(max-width:900px){.hero-signature{bottom:calc(100% + 18px)}.hero-signature img{width:25px}.hero-translation{font-size:11px}}
+@media(max-width:600px){.hero-copy-group{left:26px;right:26px;top:16%}.hero-signature{bottom:calc(100% + 18px);gap:10px}.hero-signature img{width:24px}.hero-signature span{font-size:8px}.hero-translation{max-width:29em;margin-top:14px;font-size:10px;line-height:1.7}}
+@media(prefers-reduced-motion:no-preference){.hero-signature{animation:hero-copy-appear 1.35s ease .05s both}.hero-translation{animation:hero-copy-appear 1.35s ease .7s both}}

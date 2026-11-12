@@ -1,0 +1,170 @@
+/* v35（2026-11-09）：燈の分析（HP刷新/41）をもとに、案1で強弱と文字組みの土台を見直す。
+   - TOP：ヘッダーを写真に重ね、ロゴ・縦線・コピーの組を第一画面の主役にする
+   - 2つ目：墨色・詰めた行間で、言葉の塊として静かにする
+   - 文字色は墨、ブランドの緑は面・ホバーだけ。palt、字間は小さく、動きは0.3秒に揃える
+   書体：Adobe Fontsのキットが入ったら --serif / --sans の先頭に書体名を足す。 */
+
+:root{
+  --ink:#2b2f2d;
+  --ink-sub:#5f6763;
+  --face:#f3f5f4;
+  --serif:"toppan-bunkyu-mincho-pr6n","Shippori Mincho B1","Yu Mincho",serif;
+  --sans:"Inter","toppan-bunkyu-gothic-pr6n","Noto Sans JP","Yu Gothic",sans-serif;
+  --ease:cubic-bezier(.4,.4,0,1);
+  --dur:.3s;
+}
+body{color:var(--ink);font-feature-settings:"palt";letter-spacing:.02em}
+
+/* 書体の比較用：URLに ?font=shippori / shuei / tsuku を付けると切り替わる（Adobe Fontsのプロジェクトに入っている書体だけ有効） */
+html[data-font="shippori"]{--serif:"Shippori Mincho B1","Yu Mincho",serif;--sans:"Inter","Noto Sans JP","Yu Gothic",sans-serif}
+html[data-font="shuei"]{--serif:"dnp-shuei-mincho-pr6n","Shippori Mincho B1",serif;--sans:"Inter","dnp-shuei-gothic-gin-std","toppan-bunkyu-gothic-pr6n","Noto Sans JP",sans-serif}
+html[data-font="tsuku"]{--serif:"fot-tsukuaoldmin-pr6n","Shippori Mincho B1",serif}
+
+/* ---- ヘッダー：最初は写真の上に重ね、スクロールで白地へ ---- */
+.site-header{transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.site-header:not(.is-scrolled):not(.nav-expanded){background:transparent;color:#fff}
+.site-header:not(.is-scrolled):not(.nav-expanded) .brand-logo{filter:brightness(0) invert(1)}
+.site-header:not(.is-scrolled):not(.nav-expanded) .gnav-cta{border-color:#ffffff8c}
+.site-header:not(.is-scrolled):not(.nav-expanded) .gnav-cta:hover{background:#fff;color:var(--green)}
+.gnav-link{letter-spacing:.04em}
+.gnav-link:after,.text-link:after,.arrow{transition-duration:var(--dur);transition-timing-function:var(--ease)}
+
+/* ---- ヒーロー：ロゴ・縦線・コピーの組 ---- */
+.hero{margin-top:-88px}
+.hero-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#031d17d9 0%,#031d1780 34%,#031d1700 62%),linear-gradient(180deg,#031d1799 0,#031d1700 24%)}
+.hero-lockup{position:absolute;z-index:1;left:max(7%,calc((100% - 1440px)/2));top:46%;transform:translateY(-50%);display:flex;align-items:center;gap:clamp(22px,2.4vw,36px);color:#fff}
+.lockup-mark{display:block;width:clamp(68px,6.4vw,96px);height:auto;flex:none}
+.lockup-rule{display:block;width:1px;align-self:stretch;background:#ffffff8c}
+.hero .lockup-text h1{position:static;margin:0;font:400 clamp(26px,2.55vw,38px)/1.6 var(--serif);letter-spacing:.08em;color:#fff}
+.hero .copy-line{white-space:nowrap}
+.hero-translation{margin:14px 0 0;font:400 13px/1.7 Georgia,"Times New Roman",serif;letter-spacing:.03em;color:#ffffffd9}
+@media(prefers-reduced-motion:no-preference){
+  .lockup-mark,.lockup-rule{animation:hero-copy-appear 1.35s cubic-bezier(.2,.6,.3,1) .05s both}
+}
+
+/* ---- 2つ目：言葉の塊＋下に和文・英文の2列（燈の組み方。11/9本人「浮いている」を受けて） ---- */
+.vision{padding:clamp(112px,10vw,168px) var(--edge) clamp(120px,11vw,184px)}
+.vision-inner{display:block}
+.vision h2{font-size:clamp(30px,3.4vw,52px);line-height:1.45;letter-spacing:.03em;color:var(--ink)}
+.vision-notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:clamp(40px,4vw,64px);max-width:1040px}
+.vision-body{margin:0;max-width:none;font-size:13px;line-height:2;letter-spacing:.02em;color:var(--ink-sub);padding-right:clamp(24px,3vw,48px)}
+.vision-sentence{display:block}
+.vision-en{border-left:1px solid var(--line);padding:0 0 0 clamp(24px,3vw,48px);font-family:"Inter",sans-serif;font-size:12px;line-height:1.9;letter-spacing:0}
+
+/* ---- 見出し・本文の文字組み ---- */
+.s-title{letter-spacing:.05em}
+.s-business .s-title{font-size:clamp(28px,2.5vw,38px)}
+.panel-title{line-height:1.65;letter-spacing:.03em}
+.item-meta{letter-spacing:.04em}
+
+/* ---- 事業紹介：カードをやめ、番号・事業名・提供しているもの・矢印の目次に（11/9本人） ---- */
+.s-business .s-head{margin-bottom:0}
+.biz-grid-3{display:block;counter-reset:biz}
+.biz-grid-3 .biz-item{counter-increment:biz;border-bottom:1px solid var(--line)}
+.biz-grid-3 .biz-item>a,.biz-grid-3 .biz-item>a:hover,.biz-grid-3 .biz-item>a:focus-visible,.biz-grid-3 .biz-item>a:active{background:transparent;color:var(--ink);border:0}
+.biz-grid-3 .biz-copy{min-height:0;display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1.35fr) 64px;align-items:center;gap:0 32px;padding:44px 0}
+.biz-grid-3 .biz-copy:before{content:counter(biz,decimal-leading-zero);font:400 13px/1 "Inter",sans-serif;letter-spacing:.08em;color:var(--ink-sub)}
+.biz-grid-3 .item-title{margin:0;font-size:clamp(28px,2.6vw,38px);line-height:1.4;letter-spacing:.04em;transition:color var(--dur) var(--ease)}
+.biz-grid-3 .item-text{margin:0;padding:0;font-size:14px;line-height:1.9;letter-spacing:.02em;color:var(--ink-sub)}
+.biz-grid-3 .biz-link{justify-self:end;margin:0;padding:0;min-width:0;width:56px;height:56px;display:flex;align-items:center;justify-content:center;gap:0;font-size:0;background:transparent;color:var(--ink);border:1px solid var(--line);transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+.biz-grid-3 .biz-link .arrow{width:22px}
+.biz-grid-3 .biz-item>a:hover .item-title,.biz-grid-3 .biz-item>a:focus-visible .item-title{color:var(--green)}
+.biz-grid-3 .biz-item>a:hover .biz-link,.biz-grid-3 .biz-item>a:focus-visible .biz-link{background:var(--green);border-color:var(--green);color:#fff}
+.biz-grid-3 .biz-item>a:hover .arrow{transform:translateX(4px)}
+@media(max-width:900px){
+  .biz-grid-3 .biz-copy{grid-template-columns:36px minmax(0,1fr) 44px;gap:10px 16px;padding:28px 0}
+  .biz-grid-3 .item-text{grid-column:2/3;grid-row:2;font-size:13px}
+  .biz-grid-3 .biz-link{grid-column:3;grid-row:1;width:44px;height:44px}
+  .biz-grid-3 .item-title{font-size:24px}
+}
+
+/* ---- 刺し色：ロゴの色（黄緑・青緑・藍）を、線と番号と矢印だけに少し使う ---- */
+:root{--logo-lime:#a8d235;--logo-teal:#049583;--logo-indigo:#0f3c8d;--logo-grad:linear-gradient(90deg,var(--logo-lime),var(--logo-teal) 50%,var(--logo-indigo))}
+.s-business .s-head{position:relative;align-items:flex-end}
+.s-business .s-head:after{content:"";position:absolute;left:0;bottom:-1px;width:min(240px,30%);height:3px;background:var(--logo-grad)}
+.s-lead{margin:0;font-size:14px;line-height:2;letter-spacing:.02em;color:var(--ink-sub);text-align:right}
+#biz-ai{--accent:var(--logo-indigo)}
+#biz-agri{--accent:#5d8f14}
+#biz-ad{--accent:var(--logo-teal)}
+.biz-grid-3 .biz-item{position:relative}
+.biz-grid-3 .biz-copy:before{color:var(--accent);font-weight:500;font-size:14px}
+.biz-grid-3 .biz-link{border-color:var(--accent);color:var(--accent)}
+.biz-grid-3 .biz-item:after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:2px;background:var(--accent);transition:width .5s var(--ease)}
+.biz-grid-3 .biz-item:hover:after,.biz-grid-3 .biz-item:focus-within:after{width:100%}
+.biz-grid-3 .biz-item>a:hover .item-title,.biz-grid-3 .biz-item>a:focus-visible .item-title{color:var(--accent)}
+.biz-grid-3 .biz-item>a:hover .biz-link,.biz-grid-3 .biz-item>a:focus-visible .biz-link{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(max-width:900px){
+  .s-business .s-head{display:block}
+  .s-lead{text-align:left;margin-top:16px;font-size:13px}
+  .s-lead br{display:none}
+}
+@media(prefers-reduced-motion:reduce){.biz-grid-3 .biz-item:after{transition:none}}
+
+/* ---- 取り組み・事例：横に送る（11/9本人。燈の注目のニュースと同じ仕組み） ---- */
+.works-tools{display:flex;align-items:center;gap:32px}
+.carousel-nav{display:flex;gap:8px}
+.carousel-btn{width:48px;height:48px;display:grid;place-items:center;padding:0;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+.carousel-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4}
+.carousel-btn:hover:not(:disabled),.carousel-btn:focus-visible{background:var(--green);border-color:var(--green);color:#fff}
+.carousel-btn:disabled{opacity:.35;cursor:default}
+.work-grid-6.work-track{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 64px)/3);gap:0 32px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:4px}
+.work-track::-webkit-scrollbar{display:none}
+.work-track .work-item{scroll-snap-align:start}
+@media(max-width:1100px){.work-grid-6.work-track{grid-auto-columns:calc((100% - 32px)/2)}}
+@media(max-width:600px){
+  .work-grid-6.work-track{grid-auto-columns:84%;gap:0 20px;margin-right:calc(var(--edge)*-1);padding-right:var(--edge)}
+  .works-tools{gap:16px}
+  .carousel-btn{width:40px;height:40px}
+  .s-works .s-head .text-link{display:none}
+}
+
+/* ---- 取り組み・事例：3件 ---- */
+.s-works{padding-top:clamp(96px,9vw,144px)}
+.work-grid-6 .work-item .item-title,.work-grid-6 .work-item:first-child .item-title{letter-spacing:.03em;line-height:1.7}
+.item-result{color:var(--ink-sub)}
+/* 事例：業界ラベルを事業の色の線で示し、参画形態は最後に小さく（11/9本人） */
+.work-grid-6 .item-meta{display:flex;align-items:center;gap:12px;margin:22px 0 12px}
+.work-grid-6 .item-meta:before{content:"";width:20px;height:2px;background:var(--accent,var(--green))}
+.item-industry{font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--accent,var(--ink))}
+.item-type{margin:6px 0 0;font-size:11px;line-height:1.8;letter-spacing:.04em;color:#8a928e}
+.work-grid-6 .work-item a:hover .item-title{color:var(--accent,var(--ink))}
+.work-grid-6 .work-item .item-title:after{background:var(--accent,var(--green))}
+.work-grid-6 .work-item .item-title{transition:color var(--dur) var(--ease)}
+
+/* 資料請求（11/9本人）：ヘッダーは枠なしの文字リンク、お問い合わせより一段弱く */
+.gnav{gap:28px}
+.gnav-doc{font-size:12px;letter-spacing:.06em;position:relative;padding:10px 0}
+.gnav-doc:after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--dur) var(--ease)}
+.gnav-doc:hover:after,.gnav-doc:focus-visible:after{transform:scaleX(1)}
+.gnav-doc+.gnav-cta{margin-left:-4px}
+.sp-menu-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.sp-menu-doc{border-color:#ffffff40}
+.btn-ghost{border-color:#ffffff55}
+@media(max-width:1100px){.gnav-doc{font-size:11px}}
+
+/* ヘッダーの「お問い合わせ」：ホバーで枠と文字だけロゴの色に */
+.site-header .gnav-cta:hover,.site-header .gnav-cta:focus-visible{background:transparent;border-color:var(--logo-indigo);color:var(--logo-indigo)}
+.site-header:not(.is-scrolled):not(.nav-expanded) .gnav-cta:hover,.site-header:not(.is-scrolled):not(.nav-expanded) .gnav-cta:focus-visible,.site-header.nav-expanded .gnav-cta:hover{background:transparent;border-color:var(--logo-lime);color:#fff}
+.gnav-cta{transition:border-color var(--dur) var(--ease),color var(--dur) var(--ease),background var(--dur) var(--ease)}
+
+@media(max-width:1100px){
+}
+@media(max-width:900px){
+  .hero{margin-top:-76px}
+}
+@media(max-width:600px){
+  .hero-lockup{left:26px;right:26px;top:calc(76px + 9%);transform:none;flex-direction:column;align-items:flex-start;gap:18px}
+  .lockup-mark{width:52px}
+  .lockup-rule{width:40px;height:1px;align-self:auto}
+  .hero .lockup-text h1{font-size:clamp(20px,5.6vw,24px);line-height:1.75;letter-spacing:.04em}
+  .hero .copy-line{white-space:normal}
+  .hero-translation{font-size:11px;margin-top:10px}
+  .hero-art:after{background:linear-gradient(180deg,#031d17cc 0,#031d1766 40%,#031d1700 62%)}
+  .vision{padding:96px 26px 104px}
+  .vision-notes{grid-template-columns:1fr;gap:20px}
+  .vision-en{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}
+  .vision-body{padding-right:0}
+  .vision h2{font-size:clamp(23px,6.4vw,28px);line-height:1.6}
+  .vision-body{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.lockup-mark,.lockup-rule{animation:none}}

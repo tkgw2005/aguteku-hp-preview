@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1018 829" width="1018" height="829">
+  <title>あぐてく シンボル（白抜き）</title>
+  <g id="AT-symbol" transform="translate(-109.83 -194)">
+    <path id="A-upper" data-name="A-左上片" d="M481.44,194 L507.41,473.41 L406.09,670 L236.6,670 Z" fill="#FFFFFF"/>
+    <path id="A-diagonal" data-name="A-右斜め画" d="M481.44,194 L524.9,194 L904,1003.39 L904,1023 L826.1,1023 A99,99 0 0 1 736.33,965.75 L426.84,300.16 Z" fill="#FFFFFF"/>
+    <path id="T-stem-fold" data-name="T-縦棒の折り返し面" d="M772,294 H904 V452 H772 Z" fill="#FFFFFF"/>
+    <path id="T-stem" data-name="T-縦棒" d="M772,307.62 A144.5,144.5 0 0 1 904,442.29 L904,1023 L904,1021.81 A172.2,172.2 0 0 1 772,880.07 Z" fill="#FFFFFF"/>
+    <path id="T-bar" data-name="T-横棒" d="M560.42,194 L1127.83,194 L1069.81,307.5 L616.97,307.5 Z" fill="#FFFFFF"/>
+    <path id="A-lower" data-name="A-左下片" d="M276.95,702 L505.54,702 L570.13,835 L369.43,835 L305.92,958.26 A119.5,119.5 0 0 1 199.7,1023 L109.83,1023 Z" fill="#FFFFFF"/>
+  </g>
+</svg>
