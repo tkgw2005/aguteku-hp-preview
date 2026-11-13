@@ -7,8 +7,6 @@
 
 /* ---- ボタン（共通） ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-height:54px;padding:0 24px 0 28px;border:1px solid currentColor;font:400 14px/1.4 var(--sans);letter-spacing:.06em;white-space:nowrap;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
-.cta-btn:after{content:"";flex:none;width:22px;height:8px;background:currentColor;clip-path:polygon(0 46%,84% 46%,72% 0,78% 0,100% 54%,0 54%);transition:transform var(--dur) var(--ease)}
-.cta-btn:hover:after,.cta-btn:focus-visible:after{transform:translateX(4px)}
 .cta-btn-solid{background:var(--green);border-color:var(--green);color:#fff}
 .cta-btn-solid:hover,.cta-btn-solid:focus-visible{background:var(--logo-teal);border-color:var(--logo-teal)}
 .cta-btn-line{color:var(--ink);border-color:#9fada6}
@@ -19,8 +17,7 @@
 .cta-btn-glass:hover,.cta-btn-glass:focus-visible{background:#fff;border-color:#fff;color:var(--green)}
 
 /* ---- ヘッダー ---- */
-/* ロゴは写真の上でも色付きのまま（11/13代表） */
-.site-header:not(.is-scrolled):not(.nav-expanded) .brand-logo,.nav-expanded .brand-logo{filter:none}
+/* ロゴ：ヘッダーは写真の上では白（11/13代表の再指示）、色付きはTOPの第一画面のロックアップだけ */
 /* 資料請求：文字リンク→枠のボタン。お問い合わせ：塗りのボタン */
 .gnav{gap:24px}
 .gnav-doc,.gnav-cta{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;font-size:13px;letter-spacing:.06em;border:1px solid currentColor;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
@@ -88,10 +85,8 @@
 .cv-card h3{margin:0;font:400 clamp(22px,2vw,28px)/1.5 var(--serif);letter-spacing:.05em}
 .cv-card p{margin:12px 0 0;font-size:13px;line-height:1.9;color:inherit;opacity:.85}
 .cv-card .cv-go{margin-top:auto;padding-top:24px;display:flex;align-items:center;justify-content:space-between;font-size:13px;letter-spacing:.06em;border-top:1px solid currentColor;border-top-color:#ffffff4d}
-.cv-card .cv-go:after{content:"";width:28px;height:9px;background:currentColor;clip-path:polygon(0 46%,86% 46%,74% 0,80% 0,100% 54%,0 54%);transition:transform var(--dur) var(--ease)}
 .cv-card:hover,.cv-card:focus-visible{background:#fff;border-color:#fff;color:var(--green)}
 .cv-card:hover .cv-go,.cv-card:focus-visible .cv-go{border-top-color:#10413033}
-.cv-card:hover .cv-go:after,.cv-card:focus-visible .cv-go:after{transform:translateX(6px)}
 .cv-card-main{background:#ffffffeb;color:var(--green);border-color:#fff}
 .cv-card-main .cv-go{border-top-color:#10413033}
 .cv-card-main:hover,.cv-card-main:focus-visible{background:var(--logo-lime);border-color:var(--logo-lime);color:var(--deep)}
@@ -173,3 +168,51 @@ h1,h2,h3,h4,.tm-name,.ov-steps li,.ov-saas b,.cta-band-text,.line-tab,.cv-card p
 .page-sub .site-header:not(.is-scrolled):not(.nav-expanded) .gnav-doc{border-color:var(--line);color:var(--ink)}
 .page-sub .site-header:not(.is-scrolled):not(.nav-expanded) .gnav-doc:hover,.page-sub .site-header:not(.is-scrolled):not(.nav-expanded) .gnav-doc:focus-visible{background:var(--green);border-color:var(--green);color:#fff}
 .news-page .bp-head,.news-page .crumbs{max-width:1080px}
+
+/* =====================================================================
+   矢印とボックスの統一（11/13代表「事業紹介のホバー、特に→をもっと良く」）
+   - 矢印は1種類：細い線＋開いた矢じり（SVGのマスク、文字色で塗る）
+   - 文字のあるボタンは四角＋右に矢印、矢印だけのボタンは円
+   - ホバーで矢印が右へ抜けて左から戻る。円は中心から塗りが広がる
+   ===================================================================== */
+:root{--arrow-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 12h16.5M14 6l6 6-6 6'/%3E%3C/svg%3E")}
+@keyframes arrow-through{0%{transform:none;opacity:1}42%{transform:translateX(120%);opacity:0}43%{transform:translateX(-120%);opacity:0}100%{transform:none;opacity:1}}
+
+/* 文字のあるボタン */
+.cta-btn:after,.cv-card .cv-go:after{content:"";flex:none;width:20px;height:20px;background:currentColor;clip-path:none;-webkit-mask:var(--arrow-icon) center/contain no-repeat;mask:var(--arrow-icon) center/contain no-repeat;transform:none;transition:none}
+.cv-card .cv-go:after{width:24px;height:24px}
+@media(prefers-reduced-motion:no-preference){
+  .cta-btn:hover:after,.cta-btn:focus-visible:after,.cv-card:hover .cv-go:after,.cv-card:focus-visible .cv-go:after{animation:arrow-through .55s var(--ease)}
+}
+
+/* 事業紹介の行：円の矢印ボタン */
+.biz-grid-3 .biz-link{position:relative;overflow:hidden;isolation:isolate;width:64px;height:64px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--accent)}
+.biz-grid-3 .biz-link:before{content:"";position:absolute;inset:0;z-index:-1;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .45s var(--ease)}
+.biz-grid-3 .biz-link .arrow{position:relative;width:22px;height:22px;background:currentColor;-webkit-mask:var(--arrow-icon) center/contain no-repeat;mask:var(--arrow-icon) center/contain no-repeat;transform:none;transition:none}
+.biz-grid-3 .biz-link .arrow:after{display:none}
+.biz-grid-3 .biz-item>a:hover .biz-link,.biz-grid-3 .biz-item>a:focus-visible .biz-link{background:transparent;border-color:var(--accent);color:#fff}
+.biz-grid-3 .biz-item>a:hover .biz-link:before,.biz-grid-3 .biz-item>a:focus-visible .biz-link:before{transform:scale(1)}
+.biz-grid-3 .biz-item>a:hover .arrow,.biz-grid-3 .biz-item>a:focus-visible .arrow{transform:none}
+@media(prefers-reduced-motion:no-preference){
+  .biz-grid-3 .biz-item>a:hover .arrow,.biz-grid-3 .biz-item>a:focus-visible .arrow{animation:arrow-through .6s var(--ease) .05s}
+}
+/* 行全体：事業名が少し右へ、説明文は墨色に、下線が事業の色で伸びる（既存） */
+.biz-grid-3 .item-title{transition:color var(--dur) var(--ease),transform .45s var(--ease)}
+.biz-grid-3 .item-text{transition:color var(--dur) var(--ease)}
+.biz-grid-3 .biz-item>a:hover .item-title,.biz-grid-3 .biz-item>a:focus-visible .item-title{transform:translateX(10px)}
+.biz-grid-3 .biz-item>a:hover .item-text,.biz-grid-3 .biz-item>a:focus-visible .item-text{color:var(--ink)}
+.biz-grid-3 .biz-item:after{height:1px}
+@media(max-width:900px){.biz-grid-3 .biz-link{width:48px;height:48px}.biz-grid-3 .biz-link .arrow{width:18px;height:18px}}
+@media(hover:none){.biz-grid-3 .biz-item>a:hover .item-title{transform:none}}
+
+/* 事例の送りボタン：円に */
+.carousel-btn{border-radius:50%;position:relative;overflow:hidden;isolation:isolate}
+.carousel-btn:before{content:"";position:absolute;inset:0;z-index:-1;border-radius:50%;background:var(--green);transform:scale(0);transition:transform .4s var(--ease)}
+.carousel-btn:hover:not(:disabled),.carousel-btn:focus-visible{background:transparent;border-color:var(--green);color:#fff}
+.carousel-btn:hover:not(:disabled):before,.carousel-btn:focus-visible:before{transform:scale(1)}
+
+/* 事例の画像の角：白い円＋同じ矢印 */
+.work-item .item-media:after{content:"";border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23103e30' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 12h16.5M14 6l6 6-6 6'/%3E%3C/svg%3E") center/18px no-repeat;font-size:0}
+
+/* ニュースの行の矢印 */
+.news-list a:before{content:"";width:18px;height:18px;background:var(--green);-webkit-mask:var(--arrow-icon) center/contain no-repeat;mask:var(--arrow-icon) center/contain no-repeat;font-size:0}
