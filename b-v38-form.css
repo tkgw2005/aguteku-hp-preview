@@ -1,0 +1,111 @@
+/* v38（2026-11-13）：資料請求・お問い合わせのページ。左に説明、右に入力欄。 */
+.form-page{padding-bottom:clamp(96px,9vw,144px)}
+.fp-wrap{width:calc(100% - var(--edge)*2);max-width:1280px;margin:0 auto;padding-top:clamp(48px,5vw,80px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(40px,6vw,96px);align-items:start}
+.fp-label{display:flex;align-items:center;gap:12px;margin:0 0 16px;font-size:13px;letter-spacing:.06em;color:var(--logo-teal)}
+.fp-label:before{content:"";width:20px;height:2px;background:currentColor}
+.fp-info h1,.fp-done h1{margin:0 0 20px;font:400 clamp(32px,3.4vw,48px)/1.4 var(--serif);letter-spacing:.05em}
+.fp-lead{margin:0 0 1em;font-size:15px;line-height:2;letter-spacing:.02em;color:var(--ink)}
+.fp-info{position:sticky;top:120px}
+
+/* 資料のサムネイル */
+.doc-thumbs{margin:32px 0 0}
+.doc-cover{display:block;width:100%;height:auto;box-shadow:0 18px 40px #0f2a1e24}
+.doc-pages{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.doc-pages img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.doc-spec{margin:28px 0 0;border-top:1px solid var(--ink)}
+.doc-spec div{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.doc-spec dt{font-size:12px;color:var(--ink-sub)}
+.doc-spec dd{margin:0;font-size:13px;line-height:1.9}
+
+/* 入力欄の箱 */
+.fp-form-box{background:var(--face);padding:clamp(28px,3.4vw,52px)}
+.fp-form-title{margin:0 0 28px;font:400 clamp(20px,1.8vw,24px)/1.6 var(--serif);letter-spacing:.04em}
+.field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.field label,.field legend{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0;font-size:14px;letter-spacing:.04em;color:var(--ink)}
+.req{display:inline-block;font-size:11px;letter-spacing:.08em;color:#b4472f}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field textarea{display:block;width:100%;box-sizing:border-box;min-height:54px;padding:14px 16px;border:1px solid #c3ccc7;border-radius:0;background:#fff;font:400 16px/1.6 var(--sans);color:var(--ink);transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.field textarea{min-height:180px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#a3aca8}
+.field input:hover,.field textarea:hover{border-color:#8f9b95}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px #10413026}
+.field-note{margin:8px 0 0;font-size:12px;color:var(--ink-sub)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.is-error input[type=text],.is-error input[type=email],.is-error input[type=tel],.is-error textarea{border-color:#b4472f;background:#fff8f6}
+.field-error{margin:8px 0 0;font-size:12px;color:#b4472f}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* 選択肢（種類・同意） */
+.choices{display:grid;gap:8px}
+.choice{display:flex;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border:1px solid #c3ccc7;background:#fff;font-size:14px;line-height:1.6;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.choice:hover{border-color:#8f9b95}
+.choice input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--green)}
+.choice:has(input:checked){border-color:var(--green);background:#f1f7f4}
+.choice:has(input:focus-visible){box-shadow:0 0 0 3px #10413026}
+.is-error .choice{border-color:#b4472f}
+.choice-agree{border:0;background:none;padding:4px 0;min-height:44px}
+.choice-agree:has(input:checked){background:none}
+.choice-agree span{display:flex;align-items:center;gap:10px}
+.form-page .field a,.form-agree a{text-decoration:underline;text-underline-offset:3px}
+.form-agree{margin:4px 0 24px;font-size:12px;line-height:1.9;color:var(--ink-sub)}
+.form-submit,.confirm-actions .cta-btn{width:100%;min-height:60px;font-size:15px}
+.form-submit{margin-top:8px}
+.form-status{margin:14px 0 0;font-size:13px;color:var(--ink-sub);min-height:1em}
+button.cta-btn{cursor:pointer;font-family:var(--sans)}
+button.cta-btn:disabled{opacity:.55;cursor:default}
+
+/* 確認画面 */
+.confirm-lead{margin:0 0 20px;font-size:14px;line-height:1.9}
+.confirm-list{margin:0 0 28px;border-top:1px solid var(--ink);background:#fff}
+.confirm-list div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.confirm-list dt{font-size:13px;color:var(--ink-sub)}
+.confirm-list dd{margin:0;font-size:14px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.confirm-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
+
+/* 流れ（お問い合わせ） */
+.fp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0 0;padding:0;list-style:none}
+.fp-steps li{border-top:2px solid var(--line);padding-top:12px;font-size:13px;color:var(--ink-sub)}
+.fp-steps b{display:block;font:500 11px/1.4 "Inter",sans-serif;letter-spacing:.14em;margin-bottom:2px}
+.fp-steps li.is-current{border-color:var(--green);color:var(--ink)}
+.fp-steps li.is-current b{color:var(--green)}
+.fp-aside-link{display:flex;flex-direction:column;gap:4px;margin-top:40px;padding:22px 64px 22px 24px;border:1px solid var(--line);position:relative;transition:border-color var(--dur) var(--ease)}
+.fp-aside-link span{font-size:12px;color:var(--ink-sub)}
+.fp-aside-link b{font:400 18px/1.5 var(--serif);letter-spacing:.04em}
+.fp-aside-link:after{content:"";position:absolute;right:24px;top:calc(50% - 10px);width:20px;height:20px;background:var(--green);-webkit-mask:var(--arrow-icon) center/contain no-repeat;mask:var(--arrow-icon) center/contain no-repeat}
+.fp-aside-link:hover{border-color:var(--green)}
+@media(prefers-reduced-motion:no-preference){.fp-aside-link:hover:after{animation:arrow-through .55s var(--ease)}}
+
+/* 完了ページ */
+.fp-done{width:calc(100% - var(--edge)*2);max-width:820px;margin:0 auto;padding-top:clamp(64px,7vw,120px)}
+.fp-done-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.fp-done-actions .cta-btn{min-width:220px}
+
+@media(max-width:900px){
+  .fp-wrap{grid-template-columns:1fr}
+  .fp-info{position:static}
+  .doc-thumbs{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:start}
+  .doc-pages{grid-template-columns:1fr;margin-top:0;gap:6px}
+  .doc-pages img:nth-child(n+3){display:none}
+  .fp-aside-link{display:none}
+}
+@media(max-width:600px){
+  .fp-form-box{margin:0 calc(var(--edge)*-1);padding:28px var(--edge) 32px}
+  .field-row{grid-template-columns:1fr}
+  .fp-lead{font-size:14px}
+  .confirm-list div{grid-template-columns:1fr;gap:2px;padding:14px}
+  .confirm-actions{grid-template-columns:1fr}
+  .confirm-actions .form-send{order:-1}
+  .fp-done-actions .cta-btn{width:100%}
+}
+/* スマホの資料請求：見出しのすぐ下に入力欄（サムネイルと内容は入力欄の下へ） */
+@media(max-width:900px){
+  .fp-download .fp-info{display:contents}
+  .fp-download .fp-info>*{order:1}
+  .fp-download .fp-form-box{order:2}
+  .fp-download .doc-thumbs{order:3;margin-top:8px}
+  .fp-download .doc-spec{order:4;margin-top:0}
+  .fp-download{row-gap:0}
+  .fp-download .fp-lead{margin-bottom:28px}
+}
+/* 選択肢の余白：.field label（余白0）より強く指定する */
+.field .choice{margin:0;padding:12px 16px;font-size:14px}
+.field .choice-agree{padding:4px 0;margin:0 0 22px}

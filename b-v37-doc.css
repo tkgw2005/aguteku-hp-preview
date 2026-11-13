@@ -229,3 +229,8 @@
   .case-shot figcaption{padding:8px 10px;font-size:11px}
   .bp-visual img{aspect-ratio:4/3}
 }
+
+/* 農ビス（MODEL 01）：資料p17と同じく、現場の写真に農ビスのスマホ画面を重ねる（11/13本人） */
+.md-photo-ui:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#00000040,#0000 45%);pointer-events:none}
+.md-photo .md-phone{position:absolute;inset:auto 7% 7% auto;z-index:1;width:min(40%,220px);height:auto;border:5px solid #1d1f1e;border-radius:20px;background:#fff;box-shadow:0 18px 36px #0000004d}
+@media(max-width:600px){.md-photo .md-phone{width:36%;border-width:3px;border-radius:12px;inset:auto 5% 6% auto}}
