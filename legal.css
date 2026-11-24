@@ -1,0 +1,82 @@
+/* プライバシーポリシー・サイトのご利用について */
+.legal-page .crumbs {
+  max-width: 1080px;
+}
+
+.legal-article {
+  width: calc(100% - var(--edge) * 2);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(48px, 5vw, 80px) 0 clamp(64px, 7vw, 104px);
+  color: var(--ink);
+}
+
+.legal-article h1 {
+  padding-bottom: clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid var(--ink);
+  font: 400 clamp(26px, 3vw, 40px) / 1.5 var(--serif);
+  letter-spacing: .04em;
+}
+
+.legal-body {
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: clamp(15px, 1.3vw, 16px);
+  line-height: 2;
+  letter-spacing: .02em;
+  overflow-wrap: anywhere;
+}
+
+.legal-body section {
+  margin-top: clamp(28px, 3.4vw, 48px);
+}
+
+.legal-body h2 {
+  margin-bottom: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font: 400 clamp(20px, 2vw, 25px) / 1.6 var(--serif);
+  letter-spacing: .04em;
+}
+
+.legal-body p + p,
+.legal-body dl + p,
+.legal-body p + dl {
+  margin-top: .75em;
+}
+
+.legal-body ul {
+  padding-inline-start: 1.4em;
+  list-style: disc;
+}
+
+.legal-body dl {
+  display: grid;
+  grid-template-columns: minmax(0, 12em) minmax(0, 1fr);
+  gap: .4em 1.25em;
+  margin: 0;
+}
+
+.legal-body dt {
+  font-weight: 500;
+}
+
+.legal-body dd {
+  margin: 0;
+}
+
+.legal-body a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+@media (max-width: 600px) {
+  .legal-body dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .legal-body dd + dt {
+    margin-top: .65em;
+  }
+}
